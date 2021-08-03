@@ -44,11 +44,12 @@ The first step was to examine the documentation and determine how the client and
 
 Once decrypted, the plaintext message reads:
 
+```
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultrices elit non enim faucibus, quis molestie dolor molestie. Pellentesque congue mollis pharetra. Ut ultrices purus est, sed vulputate purus euismod vitae. Curabitur nec ipsum sed neque maximus euismod in eget ex. Fusce arcu libero, vestibulum sit amet metus laoreet, dictum tempus velit. Integer tempor dolor sodales sapien vulputate, vel placerat massa laoreet. Quisque imperdiet consequat quam, in luctus justo efficitur ac. Phasellus maximus venenatis massa sit amet efficitur. Mauris congue, dui vel gravida venenatis, dui libero luctus erat, quis semper erat est non nunc.
 [Nothing to see here]
 Sed accumsan mi sed erat convallis volutpat nec ut orci. Duis blandit maximus dolor id vestibulum. Sed vel sapien ut odio volutpat venenatis. Aliquam dolor eros, maximus sit amet tellus viverra, pharetra laoreet lacus. Morbi pulvinar est lectus, vitae fermentum dui maximus id. Quisque orci nisi, viverra faucibus ultricies id, tristique in arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut aliquet neque, ac porttitor lorem.
 [KEY: 7 5 4 7 7 0 3 0]
 Maecenas vehicula luctus libero quis venenatis. Nullam vestibulum ex a neque dignissim facilisis. Aenean feugiat velit quis facilisis tristique. Sed id convallis odio. Nulla a mi tempus arcu pharetra pellentesque. Fusce tellus orci, consectetur quis enim sed, laoreet.
-
+```
 
 This contains the key: [KEY: 7 5 4 7 7 0 3 0]
