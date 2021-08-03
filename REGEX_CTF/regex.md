@@ -1,1 +1,1 @@
-josh start here:
+The website provided a download to a docker image. When mounted and run, there was a python file inside which contained a regex string. Using a combination of https://www.debuggex.com/ and https://regex101.com/, the regex was parsed and a matching string was produced. Because the python program utilizes an environment variable, the script had to be run on the docker container. The output of the script when run with a matching string was the flag: flag{72823218}.
