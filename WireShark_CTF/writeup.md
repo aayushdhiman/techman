@@ -2,6 +2,7 @@ Provided was a readme file, a pdf file documenting the communication and encrypt
 
 The first step was to examine the documentation and determine how the client and the AP communicate and authenticate.
 
+---
 
 ### The connection process is as follows:
   1. The AP sends a beacon every three seconds containing its SSID
