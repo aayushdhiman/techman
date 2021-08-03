@@ -56,6 +56,6 @@ The file in question was a Word document called ImportantFile.docm. It contained
 
 ---
 
-`mystery8` was the digit in the password to the macros, "mystery8is5," so that digit was 5.
+`mystery8` was the digit in the password to the macros, "Mystery8Is5," so that digit was 5.
 
 The final flag that we got was from combining all the digits to create flag{27424115}
