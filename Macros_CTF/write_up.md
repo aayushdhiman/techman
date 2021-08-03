@@ -2,7 +2,7 @@
 
 ---
 
-After playing through the game, the file was retrieved from [this onion link]([http://](http://f4nmfiwcj7v6e6oisd6znce3d7hm6ducuq7qmkaeu3k7oa6dqn237nad.onion/)5pgg3734qaw2gsceandkwf7hanoobi6ixodudipgugusegri74jfvgyd.onion). The files were downloaded from the images on that website.
+After playing through the game, the file was retrieved from [this onion link]([http://5pgg3734qaw2gsceandkwf7hanoobi6ixodudipgugusegri74jfvgyd.onion]). The files were downloaded from the images on that website.
 
 # The File (And Subsequent Mysteries)
 
