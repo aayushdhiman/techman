@@ -30,7 +30,7 @@ To reverse the encryption, the following process was used:
   5. Collect and decode each block of ciphertext.
   6. Decrypt the ciphertext message using the encryption key.
 
-Once decrypted, the plaintext message reads:
+Once decrypted, the plaintext message reads:\n
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultrices elit non enim faucibus, quis molestie dolor molestie. Pellentesque congue mollis pharetra. Ut ultrices purus est, sed vulputate purus euismod vitae. Curabitur nec ipsum sed neque maximus euismod in eget ex. Fusce arcu libero, vestibulum sit amet metus laoreet, dictum tempus velit. Integer tempor dolor sodales sapien vulputate, vel placerat massa laoreet. Quisque imperdiet consequat quam, in luctus justo efficitur ac. Phasellus maximus venenatis massa sit amet efficitur. Mauris congue, dui vel gravida venenatis, dui libero luctus erat, quis semper erat est non nunc.
 [Nothing to see here]
 Sed accumsan mi sed erat convallis volutpat nec ut orci. Duis blandit maximus dolor id vestibulum. Sed vel sapien ut odio volutpat venenatis. Aliquam dolor eros, maximus sit amet tellus viverra, pharetra laoreet lacus. Morbi pulvinar est lectus, vitae fermentum dui maximus id. Quisque orci nisi, viverra faucibus ultricies id, tristique in arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut aliquet neque, ac porttitor lorem.
