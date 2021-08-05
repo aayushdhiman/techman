@@ -13,7 +13,7 @@ The first thing that was given for this project was a series of instructions "Ma
 8. When decoded from base64 using cyberchef, the flag is revealed as KEY{4 2 2 4 1 6 3 7}
 
 ### mack2assembly: 
-```
+```python
 source = open("mackcode.txt", "r")
 assembly = open("noreadablemackcode.txt", "a+")
 
@@ -62,7 +62,7 @@ assembly.close()
 ```
 
 ### mackruntime.py
-```
+```python
 src = open("noreadablemackcode.txt", "r")
 output = open("mackcodeoutput1.txt", "a+")
 store = []
