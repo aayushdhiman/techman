@@ -22,6 +22,7 @@ The readme of this phase let me know that the image was stegged. It included an 
 
 <details>
   <summary>LSB Code</summary>
+    
     from PIL import Image
     import bitstring
 
@@ -41,6 +42,7 @@ The readme of this phase let me know that the image was stegged. It included an 
 
     output = open("output.bin", "wb+")
     output.write((bitstring.BitArray(bin=data)).tobytes())
+  
 </details>
 
 CF{steg_totally_rocks!}
