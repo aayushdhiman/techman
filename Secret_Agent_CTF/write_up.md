@@ -22,10 +22,10 @@ The readme of this phase let me know that the image was stegged. It included an 
 
 <details>
   <summary>LSB Code</summary>
-    img = 'C:\\Users\\student\\Desktop\\agent.png'
-
     from PIL import Image
     import bitstring
+
+    img = 'C:\\Users\\student\\Desktop\\agent.png'
 
     extracted_bin = []
     with Image.open("C:\\Users\\student\\Desktop\\agent.png") as img:
