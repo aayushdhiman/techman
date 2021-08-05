@@ -1,4 +1,4 @@
-#The Beginning
+The Beginning
 
 The first thing given to us on the .onion link was a .raw file titled "memory dump."
 
