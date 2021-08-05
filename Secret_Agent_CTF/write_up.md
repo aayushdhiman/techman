@@ -20,6 +20,13 @@ CF{h3xDuMp_FTW}
 
 The readme of this phase let me know that the image was stegged. It included an explanation of what Least Significant Bit steganography is and described how to crack it. I wrote a python script (attached) that would extract the last bit of each channel of each pixel. I found the stegged flag, as well as instructions for the next flag. 
 
+<details>
+  <summary>LSB Code</summary>
+  
+  Spoiler text. Note that it's important to have a space after the summary tag. You should be able to write any markdown you want inside the `<details>` tag... just make sure you close `<details>` afterward.
+
+</details>
+
 CF{steg_totally_rocks!}
 
 # The Moonwalk
