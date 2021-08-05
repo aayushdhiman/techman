@@ -22,7 +22,7 @@ The readme of this phase let me know that the image was stegged. It included an 
 
 <details>
   <summary>LSB Code</summary>
-  ```python
+  ```
     # -*- coding: utf-8 -*-
     """
     Created on Wed Jul 28 09:48:42 2021
@@ -47,7 +47,7 @@ The readme of this phase let me know that the image was stegged. It included an 
 
     output = open("output.bin", "wb+")
     output.write((bitstring.BitArray(bin=data)).tobytes())
-    ```
+  ```
 </details>
 
 CF{steg_totally_rocks!}
