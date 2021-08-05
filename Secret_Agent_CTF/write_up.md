@@ -22,11 +22,6 @@ The readme of this phase let me know that the image was stegged. It included an 
 
 <details>
   <summary>LSB Code</summary>
-    # -*- coding: utf-8 -*-
-    """
-    Created on Wed Jul 28 09:48:42 2021
-    @author: student
-    """
     img = 'C:\\Users\\student\\Desktop\\agent.png'
 
     from PIL import Image
