@@ -126,7 +126,7 @@ The first step was to examine the documentation and determine how the client and
 #### 10. Use a hex editor to place the ciphertext message bytes into a file:
    - <details>
      <summary>Ciphertext file</summary>
-     See <a href=https://github.com/aayushdhiman/techman/blob/main/WireShark_CTF/encrypted_message.txt><code>encrypted_message.txt</code></a>
+     <a href=https://github.com/aayushdhiman/techman/blob/main/WireShark_CTF/encrypted_message.txt><code>encrypted_message.txt</code></a>
      </details>
    
 #### 10. Decrypt the ciphertext message file with AES using <a href=http://aes.online-domain-tools.com/>OnlineDomainTools</a> and the encryption key:
