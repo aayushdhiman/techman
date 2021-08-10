@@ -88,7 +88,7 @@ The first step was to examine the documentation and determine how the client and
    - <details>
      <summary>MD5 hash of <code>Client_HMAC + AP_HMAC</code></summary>
      <pre>
-     md5(d01de991ee1e1650) = 8b25ab2c0d326bbae279076554397f64
+     md5(d0 1d e9 91 ee 1e 16 50) = 8b 25 ab 2c 0d 32 6b ba e2 79 07 65 54 39 7f 64
      </pre>
      </details>
    
