@@ -123,7 +123,7 @@ The first step was to examine the documentation and determine how the client and
      </pre>
      </details>
      
-#### 10. Use a hex editor (such as <a href=https://mh-nexus.de/en/hxd>HxD</a>)to place the ciphertext message bytes into a file:
+#### 10. Use a hex editor (such as <a href=https://mh-nexus.de/en/hxd>HxD</a>) to place the ciphertext message bytes into a file:
    - <details>
      <summary>Ciphertext file</summary>
      <a href=https://github.com/aayushdhiman/techman/blob/main/WireShark_CTF/encrypted_message.txt><code>encrypted_message.txt</code></a>
