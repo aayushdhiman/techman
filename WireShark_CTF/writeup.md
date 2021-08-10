@@ -115,7 +115,7 @@ The first step was to examine the documentation and determine how the client and
      </pre>
      </details>
    
-#### 9. Decode each block of ciphertext bytes from base64 using <a href=https://cryptii.com/>Cryptii</a>, then combine them into a single string:
+#### 9. Decode each block of ciphertext bytes from base64 using <a href=https://cryptii.com/pipes/hex-to-base64>Cryptii</a>, then combine them into a single string:
    - <details>
      <summary>Decoded ciphertext message</summary>
      <pre>
