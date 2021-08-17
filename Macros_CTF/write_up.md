@@ -10,6 +10,16 @@ After playing through the game, the file was retrieved from [this onion link]([h
 
 The file in question was a Word document called ImportantFile.docm. It contained a series of macros that would run when one enabled the macros of the file. At first, all the macros discernably did was download two files, one an image of a 7, and the other a hex file that contained the number 2, and open the image of a 2 in your browser.
 
+---
+# Malware Analysis
+
+---
+
+Due to the infamous reputation of word macros, I was hesitant to run the file (enable macros). Instead, I extracted the vbascript and ran it in an emulator called vmonkey. Vmonkey does self-contained runtime analysis of javascript and vbscript files to give insights into what files are being used. In the output two url's are exposed that be downloaded. The files were images with the number 2 and 7. Because the runtime analysis didn't give any paths to follow, I unlocked the word document useing evil clippy so that the macros can be read in microsoft word and debugged.
+
+---
+
+# Debugging Each Method
 ### Mystery1
 
 ---
