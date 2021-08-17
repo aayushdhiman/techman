@@ -7,10 +7,13 @@ The first thing that was given for this project was a series of instructions "Ma
 2. Have the mack2assembly.py file in the same directory as the MACK file. Run python mack2assembly.py to output a new file nomackcode.txt
 3. When analyzing nomackcode.txt you’ll notice that certain commands listed in the README aren’t listed while others are extremely common. 
 4. The CHR, STR, LOAD, ADD, SUB, MULT, and PUSH commands were all extremely common. When looking further I noticed that a series of letters are being created with the CHR command.
-5. I created and ran a python script mackruntime.py that followed the instructions in nomackcode.txt and captured the string of characters being created by the CHR command
-6. To do this, have mackruntime.py in the same directory and run python mackruntime.py 
-7. The output will be the string S0VZezQgMiAyIDQgMSA2IDMgN30= 
-8. When decoded from base64 using cyberchef, the flag is revealed as KEY{4 2 2 4 1 6 3 7}
+5. I was initially focused on what was being stored using the STR command, however the I was confused that it stored all data to the same address.
+6. That's why you can see that I was also looking at the STR output in my python script.
+7. It wasn't until shifting attention to the CHR command that I realized STR was a distraction.
+8. I created and ran a python script mackruntime.py that followed the instructions in nomackcode.txt and captured the string of characters being created by the CHR command
+9. To do this, have mackruntime.py in the same directory and run python mackruntime.py 
+10. The output will be the string S0VZezQgMiAyIDQgMSA2IDMgN30= 
+11. When decoded from base64 using cyberchef, the flag is revealed as KEY{4 2 2 4 1 6 3 7}
 
 ### mack2assembly: 
 ```python
