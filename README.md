@@ -1,9 +1,17 @@
 # TechMan
 Write-up for the TechMan group project.
 
+Contents:
+1. [MackLang](#macklang)
+2. [Regex](#regex)
+3. [Volatility](#volatility)
+4. [CrackME](#crackme)
+5. [Macros](#macros)
+6. [Wireshark](#wireshark)
+
 ---
 
-# MackLang
+# MackLang <a name="macklang"></a>
 The first thing that was given for this project was a series of instructions "Mack code" and a readme explaining what each occurrence of "MACK" can mean in a given instance. To pass this challenge, the MACK code needs to be analyzed, assembled, and ran to see the output.
 
 ## Steps
@@ -149,13 +157,13 @@ for i in range(0, len(chars)):
 
 ---
 
-# Regex
+# Regex <a name="regex"></a>
 
 The website provided a download to a docker image, which I mounted and ran. There was a python file inside which contained a regex string. After recognizing that the program required a matching string to continue, I used a combination of https://www.debuggex.com/ and https://regex101.com/ to reverse-engineer the regex in a linear fashion. I originally ran the script on my host machine, but this didn't work because the script relied on reading from an environment variable only found on the docker image. After running the script again in the docker container, the output was the flag: `flag{72823218}`.
 
 ---
 
-# Volatility
+# Volatility <a name="volatility"></a>
 
 ## The Beginning:
 
@@ -183,7 +191,7 @@ python vol.py -f memory_dump.raw --profile=Win10x64_19041 mutantscan
 
 ---
 
-# CrackME
+# CrackME <a name="crackme"></a>
 
 ## The Child
 
@@ -248,7 +256,7 @@ The final flag was given to us after inputting the correct password.
 
 ---
 
-# Macros
+# Macros <a name="macros"></a>
 
 ## Getting the file
 
@@ -299,7 +307,7 @@ The final flag that we got was from combining all the digits to create flag{2742
 
  ---
  
-# Wireshark
+# Wireshark <a name="wireshark"></a>
 
 Provided was a readme file, a pdf file documenting the communication and encryption process, and a pcap file containing the encrypted packets.
 
