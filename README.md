@@ -2,10 +2,10 @@
 Write-up for the TechMan group project.
 
 
-## MackLang
+# MackLang
 The first thing that was given for this project was a series of instructions "Mack code" and a readme explaining what each occurrence of "MACK" can mean in a given instance. To pass this challenge, the MACK code needs to be analyzed, assembled, and ran to see the output.
 
-### Steps
+## Steps
 
 1. A python script mack2assembly.py was used to translate the Mack code into a more readable assembly based off of the definitions given in the readme
 2. Have the mack2assembly.py file in the same directory as the MACK file. Run python mack2assembly.py to output a new file nomackcode.txt
@@ -143,98 +143,78 @@ for i in range(0, len(chars)):
     print(chars[i], end='')
 ```
 
-# Getting the file
-
 ---
+
+# CrackME
+
+## Getting the file
 
 After playing through the game, the file was retrieved from [this onion link]([http://5pgg3734qaw2gsceandkwf7hanoobi6ixodudipgugusegri74jfvgyd.onion]). The files were downloaded from the images on that website.
 
-# The File (And Subsequent Mysteries)
-
----
+## The File (And Subsequent Mysteries)
 
 The file in question was a Word document called ImportantFile.docm. It contained a series of macros that would run when one enabled the macros of the file. At first, all the macros discernably did was download two files, one an image of a 7, and the other a hex file that contained the number 2, and open the image of a 2 in your browser.
 
----
-# Malware Analysis
+## Malware Analysis
 
----
 
 Due to the infamous reputation of word macros, I was hesitant to run the file (enable macros). Instead, I extracted the vbascript and ran it in an emulator called vmonkey. Vmonkey does self-contained runtime analysis of javascript and vbscript files to give insights into what files are being used. In the output two url's are exposed that be downloaded. The files were images with the number 2 and 7. Because the runtime analysis didn't give any paths to follow, I unlocked the word document useing evil clippy so that the macros can be read in microsoft word and debugged.
 
----
+## Debugging Each Method
+#### Mystery1
 
-# Debugging Each Method
-### Mystery1
-
----
 
 `mystery1` downloaded the hex file that contained the number 2, so the digit for that mystery was 2.
 
-### Mystery2
+#### Mystery2
 
----
 
 `mystery2` opened a bitly link that directed to the image of the 7, so that digit was 7.
 
-### Mystery3
+#### Mystery3
 
----
 
 `mystery3` looked for a running process called "ProgramWithThisName.exe." You could either create the exe file and run it to get the digit, or you could have the macro print out what the if statement returned. Either way, the digit is 4.
 
-### Mystery4
-
----
+#### Mystery4
 
 `mystery4` opened a bitly link for an image that showed the number 2, so that digit was 2.
 
-### Mystery5
-
----
+#### Mystery5
 
 `mystery5` was a document variable that contained the number 4.
 
-### Mystery6
-
----
+#### Mystery6
 
 `mystery6` added a 1 in font 1 to the end of the text in the Word document, so that digit was 1.
 
-### Mystery7
+#### Mystery7
 
----
 
 `mystery7` printed the number 1 in the Immediate window.
 
 ### Mystery8
-
----
 
 `mystery8` was the digit in the password to the macros, "Mystery8Is5," so that digit was 5.
 
 The final flag that we got was from combining all the digits to create flag{27424115}
 
 
-# The Child
-
----
+## The Child
 
 The first flag was very simple, it was contained in the QR code that was on the image.
 
 CF{babyyoda}
 
-# The First Dump
+## The First Dump
 
----
 
 This flag was contained in the hexdump of the agent.png file. I ran the strings command on agent.pngt to see the flag at the end of the file. Alternatively, one could run the xxd command on agent.png and see it at the end of the hexdump.
 
 CF{h3xDuMp_FTW}
 
-# Stegosaurus Hex
+## Stegosaurus Hex
 
----
 
 The readme of this phase let me know that the image was stegged. It included an explanation of what Least Significant Bit steganography is and described how to crack it. I wrote a python script (attached) that would extract the last bit of each channel of each pixel. I found the stegged flag, as well as instructions for the next flag. 
 
@@ -265,53 +245,53 @@ The readme of this phase let me know that the image was stegged. It included an 
 
 CF{steg_totally_rocks!}
 
-# The Moonwalk
-
----
+## The Moonwalk
 
 The hint that I got out of the least significant bit output told me that the binary that was above it was encrypted with DES (single DES). I tossed it through the DES decryption on CyberChef and used the first flag (babyyoda) as the key. The output gave me the zip file (phase4.zip). The flag for this phase was contained in the least significant bit output, after the binary. 
 
 CF{luk3_b1nw4lk3r}
 
-# The Avengers
-
----
+## The Avengers
 
 This flag was in the assembly for crackme in the zip file. Once decompiled, there was a stringcompare that included a comparison between s and CF{%s_%s_%s}, vision, hearts, wanda. The purpose of the line is to compare s, the user input, with V1s10n (vision), h34RTs (hearts), and W4nd4.
 
 CF{V1s10n_h34RTs_W4nd4}
 
-# The Real Flag
-
----
+## The Real Flag
 
 The final flag was given to us after inputting the correct password. 
 
 flag{8 3 4 0 3 2 7 3}
 
-# The Beginning:
+---
+
+# Volatility
+
+## The Beginning:
 
 The first item given to us on the .onion link for this challenge was a .raw file titled "memory dump."
 
-# Interaction with Volatility:
+## Interaction with Volatility:
 
 Using **Volatility** within AmOS (Kali), we were able to access the contents of the .raw file given, showing us the actual contents of the memory dump and the processes that were running at the time of the dump.
 
-# First attempt with the Memory Dump:
+## First attempt with the Memory Dump:
 
 Originally, we were looking through the dump to find processes that looked out of place or suspicious, but we kept hitting dead ends. However, eventually we found a compelling article online about **mutexes** and how they are paired with memory dumps.
 
-# Finale:
+## Finale:
 
 Eventually, after searching for **mutexes** within the memory dump, a base64 string was found. When this string was decoded, a hexadecimal string was produced. When decoded to ascii a second time, this produced the key to the challenge: *KEY{3 2 8 6 4 7 7 3}.*
 
-## Commands:
+### Commands:
 
 ```
 python vol.py -f memory_dump.raw imageinfo
 python vol.py -f memory_dump.raw --profile=Win10x64_19041 mutantscan
 ```
-
+ ---
+ 
+# Wireshark
 
 Provided was a readme file, a pdf file documenting the communication and encryption process, and a pcap file containing the encrypted packets.
 
@@ -320,33 +300,29 @@ The first step was to examine the documentation and determine how the client and
 <details>
   <summary>Simplified Documentation</summary>
   
-### Connection:
+#### Connection:
 1. The AP sends a beacon every three seconds containing its SSID
 2. The client responds with a probe request containing the AP's SSID and the string "H4ck02Auth".
 3. The AP replies with a probe response containing its SSID and the authorization magic.
 
----
 
-### Authentication:
+#### Authentication:
 1. The client sends an authentication frame
 2. The AP sends the first key (K1) containing a random 4 byte HMAC (`AP_HMAC`) and the router password. Both are XOR'd using the authorization magic.
 3. The client decodes the key using the authorization magic, then sends a second key (K2) containing a random 4 byte HMAC (`Client_HMAC`) and the router password. Both are XOR'd using the AP_HMAC
 4. The AP sends a K3 verifying whether the authentication was successful or not.
 
----
 
-### Encryption:
+#### Encryption:
 1. The plaintext message is encrypted using AES. The encryption key is the MD5 hash of the `Client_HMAC` appended to the `AP_HMAC` (`Client_HMAC + AP_HMAC`).
 2. The ciphertext is split into blocks of 255 bytes or less.
 3. Each block is encoded using base64.
 
----
 
-### Transmission:
+#### Transmission:
 1. Each block is sent as an individual packet from the client to the AP. Each packet contains the total size of the message directly before the block.
 2. The AP decodes and collects each block until the total size is reached, then decrypts the ciphertext into the original message.
   
----
   
 </details>
 
