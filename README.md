@@ -1,3 +1,5 @@
+## We all hail our overlord Nick.
+
 # TechMan
 Write-up for the TechMan group project.
 
