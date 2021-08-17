@@ -1,12 +1,12 @@
 # TechMan
 Write-up for the TechMan group project.
 
+---
 
 # MackLang
 The first thing that was given for this project was a series of instructions "Mack code" and a readme explaining what each occurrence of "MACK" can mean in a given instance. To pass this challenge, the MACK code needs to be analyzed, assembled, and ran to see the output.
 
 ## Steps
-
 1. A python script mack2assembly.py was used to translate the Mack code into a more readable assembly based off of the definitions given in the readme
 2. Have the mack2assembly.py file in the same directory as the MACK file. Run python mack2assembly.py to output a new file nomackcode.txt
 3. When analyzing nomackcode.txt you’ll notice that certain commands listed in the README aren’t listed while others are extremely common. 
@@ -16,57 +16,60 @@ The first thing that was given for this project was a series of instructions "Ma
 7. The output will be the string S0VZezQgMiAyIDQgMSA2IDMgN30= 
 8. When decoded from base64 using cyberchef, the flag is revealed as KEY{4 2 2 4 1 6 3 7}
 
-### mack2assembly: 
-```python
+<details>
+    <summary>mack2assembly.py</summary>
+    <pre lang="python">
 source = open("mackcode.txt", "r")
 assembly = open("noreadablemackcode.txt", "a+")
 
-at6 = False
-while True:
-    line = source.readline()
-    count = line.count("MACK")
-    if count == 0:
-        if at6:
-            assembly.write("STACK\n")
-            at6 = False
+    at6 = False
+    while True:
+        line = source.readline()
+        count = line.count("MACK")
+        if count == 0:
+            if at6:
+                assembly.write("STACK\n")
+                at6 = False
+            else:
+                assembly.write("EXIT\n")
+        elif count == 1:
+            if at6:
+                assembly.write("INPUT\n")
+                at6 = False
+            else:
+                assembly.write("MACK\n")
+        elif count == 2:
+            assembly.write("-\n")
+        elif count == 3:
+            assembly.write("+\n")
+        elif count == 4:
+            assembly.write("x\n")
+        elif count == 5:
+            assembly.write("compare\n")
+        elif count == 6:
+            assembly.write("LOAD\n")
+            at6 = True
+        elif count == 7:
+            assembly.write("STR\n")
+        elif count == 8:
+            assembly.write("JMP\n")
+        elif count == 9:
+            assembly.write("CHAR\n")
         else:
-            assembly.write("EXIT\n")
-    elif count == 1:
-        if at6:
-            assembly.write("INPUT\n")
-            at6 = False
-        else:
-            assembly.write("MACK\n")
-    elif count == 2:
-        assembly.write("-\n")
-    elif count == 3:
-        assembly.write("+\n")
-    elif count == 4:
-        assembly.write("x\n")
-    elif count == 5:
-        assembly.write("compare\n")
-    elif count == 6:
-        assembly.write("LOAD\n")
-        at6 = True
-    elif count == 7:
-        assembly.write("STR\n")
-    elif count == 8:
-        assembly.write("JMP\n")
-    elif count == 9:
-        assembly.write("CHAR\n")
-    else:
-        value=count-10
-        output = str(value) + "\n"
-        assembly.write(output)
-    if not line:
-        break
+            value=count-10
+            output = str(value) + "\n"
+            assembly.write(output)
+        if not line:
+            break
 
-source.close()
-assembly.close()
-```
+    source.close()
+    assembly.close()
+</pre>
+</details>
 
-### mackruntime.py
-```python
+<details>
+    <summary>mackruntime.py</summary>
+    <pre lang="python">
 src = open("noreadablemackcode.txt", "r")
 output = open("mackcodeoutput1.txt", "a+")
 store = []
@@ -75,193 +78,80 @@ chars = []
 while True:
     line = src.readline().strip('\n')
 
-    if line == "+":
-        first = 0
-        second = 0
-        if str(type(stack[0])).count('str') > 0:
-            first = ord(stack[0])
-        else:
-            first = stack[0]
+        if line == "+":
+            first = 0
+            second = 0
+            if str(type(stack[0])).count('str') > 0:
+                first = ord(stack[0])
+            else:
+                first = stack[0]
 
-        if str(type(stack[1])).count('str') > 0:
-            second = ord(stack[1])
-        else:
-            second = stack[1]
-        
-        stack.insert(0, second + first)
-    elif line == "-":
-        first = 0
-        second = 0
-        if str(type(stack[0])).count('str') > 0:
-            first = ord(stack[0])
-        else:
-            first = stack[0]
+            if str(type(stack[1])).count('str') > 0:
+                second = ord(stack[1])
+            else:
+                second = stack[1]
 
-        if str(type(stack[1])).count('str') > 0:
-            second = ord(stack[1])
-        else:
-            second = stack[1]
-        stack.insert(0, second - first) 
-    elif line == "x":
-        first = 0
-        second = 0
-        if str(type(stack[0])).count('str') > 0:
-            first = ord(stack[0])
-        else:
-            first = stack[0]
+            stack.insert(0, second + first)
+        elif line == "-":
+            first = 0
+            second = 0
+            if str(type(stack[0])).count('str') > 0:
+                first = ord(stack[0])
+            else:
+                first = stack[0]
 
-        if str(type(stack[1])).count('str') > 0:
-            second = ord(stack[1])
+            if str(type(stack[1])).count('str') > 0:
+                second = ord(stack[1])
+            else:
+                second = stack[1]
+            stack.insert(0, second - first) 
+        elif line == "x":
+            first = 0
+            second = 0
+            if str(type(stack[0])).count('str') > 0:
+                first = ord(stack[0])
+            else:
+                first = stack[0]
+
+            if str(type(stack[1])).count('str') > 0:
+                second = ord(stack[1])
+            else:
+                second = stack[1]
+            stack.insert(0, second * first)
+        elif line == "compare":
+            continue
+        elif line == "LOAD":
+            continue
+        elif line == "STACK":
+            stack.insert(0, store[stack[0]-1])
+
+        elif line == "STR":
+            store.insert(0, stack[1])
+            del stack[1]
+        elif line == "JMP":
+            continue
+        elif line == "CHAR":
+            char = chr(stack[0])
+            stack.insert(0, char)
+            chars.insert(0, char)
+        elif line == "INPUT":
+            continue
+        elif line == "EXIT":
+            break;
         else:
-            second = stack[1]
-        stack.insert(0, second * first)
-    elif line == "compare":
-        continue
-    elif line == "LOAD":
-        continue
-    elif line == "STACK":
-        stack.insert(0, store[stack[0]-1])
-        
-    elif line == "STR":
-        store.insert(0, stack[1])
-        del stack[1]
-    elif line == "JMP":
-        continue
-    elif line == "CHAR":
-        char = chr(stack[0])
-        stack.insert(0, char)
-        chars.insert(0, char)
-    elif line == "INPUT":
-        continue
-    elif line == "EXIT":
-        break;
-    else:
-        pushed = int(line)
-        stack.insert(0, pushed)
+            pushed = int(line)
+            stack.insert(0, pushed)
 
 for i in range(0, len(chars)):
     print(chars[i], end='')
-```
+</pre>
+</details>
 
 ---
 
-# CrackME
+# Regex
 
-## Getting the file
-
-After playing through the game, the file was retrieved from [this onion link]([http://5pgg3734qaw2gsceandkwf7hanoobi6ixodudipgugusegri74jfvgyd.onion]). The files were downloaded from the images on that website.
-
-## The File (And Subsequent Mysteries)
-
-The file in question was a Word document called ImportantFile.docm. It contained a series of macros that would run when one enabled the macros of the file. At first, all the macros discernably did was download two files, one an image of a 7, and the other a hex file that contained the number 2, and open the image of a 2 in your browser.
-
-## Malware Analysis
-
-
-Due to the infamous reputation of word macros, I was hesitant to run the file (enable macros). Instead, I extracted the vbascript and ran it in an emulator called vmonkey. Vmonkey does self-contained runtime analysis of javascript and vbscript files to give insights into what files are being used. In the output two url's are exposed that be downloaded. The files were images with the number 2 and 7. Because the runtime analysis didn't give any paths to follow, I unlocked the word document useing evil clippy so that the macros can be read in microsoft word and debugged.
-
-## Debugging Each Method
-#### Mystery1
-
-
-`mystery1` downloaded the hex file that contained the number 2, so the digit for that mystery was 2.
-
-#### Mystery2
-
-
-`mystery2` opened a bitly link that directed to the image of the 7, so that digit was 7.
-
-#### Mystery3
-
-
-`mystery3` looked for a running process called "ProgramWithThisName.exe." You could either create the exe file and run it to get the digit, or you could have the macro print out what the if statement returned. Either way, the digit is 4.
-
-#### Mystery4
-
-`mystery4` opened a bitly link for an image that showed the number 2, so that digit was 2.
-
-#### Mystery5
-
-`mystery5` was a document variable that contained the number 4.
-
-#### Mystery6
-
-`mystery6` added a 1 in font 1 to the end of the text in the Word document, so that digit was 1.
-
-#### Mystery7
-
-
-`mystery7` printed the number 1 in the Immediate window.
-
-### Mystery8
-
-`mystery8` was the digit in the password to the macros, "Mystery8Is5," so that digit was 5.
-
-The final flag that we got was from combining all the digits to create flag{27424115}
-
-
-## The Child
-
-The first flag was very simple, it was contained in the QR code that was on the image.
-
-CF{babyyoda}
-
-## The First Dump
-
-
-This flag was contained in the hexdump of the agent.png file. I ran the strings command on agent.pngt to see the flag at the end of the file. Alternatively, one could run the xxd command on agent.png and see it at the end of the hexdump.
-
-CF{h3xDuMp_FTW}
-
-## Stegosaurus Hex
-
-
-The readme of this phase let me know that the image was stegged. It included an explanation of what Least Significant Bit steganography is and described how to crack it. I wrote a python script (attached) that would extract the last bit of each channel of each pixel. I found the stegged flag, as well as instructions for the next flag. 
-
-<details>
-  <summary>LSB Code</summary>
-    
-    from PIL import Image
-    import bitstring
-
-    img = 'C:\\Users\\student\\Desktop\\agent.png'
-
-    extracted_bin = []
-    with Image.open("C:\\Users\\student\\Desktop\\agent.png") as img:
-        width, height = img.size
-        for x in range(0, width):
-            for y in range(0, height):
-                pixel = list(img.getpixel((x, y)))
-                for n in range(0,4):
-                    extracted_bin.append(pixel[n]&1)
-                    # print(pixel[n]&1)
-
-    data = "".join([str(x) for x in extracted_bin])
-
-    output = open("output.bin", "wb+")
-    output.write((bitstring.BitArray(bin=data)).tobytes())
-  
-</details>
-
-CF{steg_totally_rocks!}
-
-## The Moonwalk
-
-The hint that I got out of the least significant bit output told me that the binary that was above it was encrypted with DES (single DES). I tossed it through the DES decryption on CyberChef and used the first flag (babyyoda) as the key. The output gave me the zip file (phase4.zip). The flag for this phase was contained in the least significant bit output, after the binary. 
-
-CF{luk3_b1nw4lk3r}
-
-## The Avengers
-
-This flag was in the assembly for crackme in the zip file. Once decompiled, there was a stringcompare that included a comparison between s and CF{%s_%s_%s}, vision, hearts, wanda. The purpose of the line is to compare s, the user input, with V1s10n (vision), h34RTs (hearts), and W4nd4.
-
-CF{V1s10n_h34RTs_W4nd4}
-
-## The Real Flag
-
-The final flag was given to us after inputting the correct password. 
-
-flag{8 3 4 0 3 2 7 3}
+The website provided a download to a docker image, which I mounted and ran. There was a python file inside which contained a regex string. After recognizing that the program required a matching string to continue, I used a combination of https://www.debuggex.com/ and https://regex101.com/ to reverse-engineer the regex in a linear fashion. I originally ran the script on my host machine, but this didn't work because the script relied on reading from an environment variable only found on the docker image. After running the script again in the docker container, the output was the flag: `flag{72823218}`.
 
 ---
 
@@ -281,21 +171,139 @@ Originally, we were looking through the dump to find processes that looked out o
 
 ## Finale:
 
-Eventually, after searching for **mutexes** within the memory dump, a base64 string was found. When this string was decoded, a hexadecimal string was produced. When decoded to ascii a second time, this produced the key to the challenge: *KEY{3 2 8 6 4 7 7 3}.*
+Eventually, after searching for **mutexes** within the memory dump, a base64 string was found. When this string was decoded, a hexadecimal string was produced. When decoded to ascii a second time, this produced the key to the challenge: `KEY{3 2 8 6 4 7 7 3}`.
 
 ### Commands:
 
+These were the two commands necessary to get the key:
 ```
 python vol.py -f memory_dump.raw imageinfo
 python vol.py -f memory_dump.raw --profile=Win10x64_19041 mutantscan
 ```
+
+---
+
+# CrackME
+
+## The Child
+
+The first flag was very simple, it was contained in the QR code that was on the image.
+
+`CF{babyyoda}`
+
+## The First Dump
+
+This flag was contained in the hexdump of the agent.png file. I ran the strings command on agent.pngt to see the flag at the end of the file. Alternatively, one could run the xxd command on agent.png and see it at the end of the hexdump.
+
+`CF{h3xDuMp_FTW}`
+
+## Stegosaurus Hex
+
+The readme of this phase let me know that the image was stegged. It included an explanation of what Least Significant Bit steganography is and described how to crack it. I wrote a python script (attached) that would extract the last bit of each channel of each pixel. I found the stegged flag, as well as instructions for the next flag. 
+
+<details>
+    <summary>LSB Code</summary>
+    <pre lang="python">
+from PIL import Image
+import bitstring
+
+    img = 'C:\\Users\\student\\Desktop\\agent.png'
+
+    extracted_bin = []
+    with Image.open("C:\\Users\\student\\Desktop\\agent.png") as img:
+        width, height = img.size
+        for x in range(0, width):
+            for y in range(0, height):
+                pixel = list(img.getpixel((x, y)))
+                for n in range(0,4):
+                    extracted_bin.append(pixel[n]&1)
+                    # print(pixel[n]&1)
+
+    data = "".join([str(x) for x in extracted_bin])
+
+    output = open("output.bin", "wb+")
+    output.write((bitstring.BitArray(bin=data)).tobytes())
+</pre>
+</details>
+
+`CF{steg_totally_rocks!}`
+
+## The Moonwalk
+
+The hint that I got out of the least significant bit output told me that the binary that was above it was encrypted with DES (single DES). I tossed it through the DES decryption on CyberChef and used the first flag (babyyoda) as the key. The output gave me the zip file (phase4.zip). The flag for this phase was contained in the least significant bit output, after the binary. 
+
+`CF{luk3_b1nw4lk3r}`
+
+## The Avengers
+
+This flag was in the assembly for crackme in the zip file. Once decompiled, there was a stringcompare that included a comparison between s and CF{%s_%s_%s}, vision, hearts, wanda. The purpose of the line is to compare s, the user input, with V1s10n (vision), h34RTs (hearts), and W4nd4.
+
+`CF{V1s10n_h34RTs_W4nd4}`
+
+## The Real Flag
+
+The final flag was given to us after inputting the correct password. 
+
+`flag{8 3 4 0 3 2 7 3}`
+
+---
+
+# Macros
+
+## Getting the file
+
+After playing through the game, the file was retrieved from [this onion link]([http://5pgg3734qaw2gsceandkwf7hanoobi6ixodudipgugusegri74jfvgyd.onion]). The files were downloaded from the images on that website.
+
+## The File (And Subsequent Mysteries)
+
+The file in question was a Word document called ImportantFile.docm. It contained a series of macros that would run when one enabled the macros of the file. At first, all the macros discernably did was download two files, one an image of a 7, and the other a hex file that contained the number 2, and open the image of a 2 in your browser.
+
+## Malware Analysis
+
+Due to the infamous reputation of word macros, I was hesitant to run the file (enable macros). Instead, I extracted the vbascript and ran it in an emulator called vmonkey. Vmonkey does self-contained runtime analysis of javascript and vbscript files to give insights into what files are being used. In the output two url's are exposed that be downloaded. The files were images with the number 2 and 7. Because the runtime analysis didn't give any paths to follow, I unlocked the word document useing evil clippy so that the macros can be read in microsoft word and debugged.
+
+## Debugging Each Method
+#### Mystery1
+
+`mystery1` downloaded the hex file that contained the number 2, so the digit for that mystery was 2.
+
+#### Mystery2
+
+`mystery2` opened a bitly link that directed to the image of the 7, so that digit was 7.
+
+#### Mystery3
+
+`mystery3` looked for a running process called "ProgramWithThisName.exe." You could either create the exe file and run it to get the digit, or you could have the macro print out what the if statement returned. Either way, the digit is 4.
+
+#### Mystery4
+
+`mystery4` opened a bitly link for an image that showed the number 2, so that digit was 2.
+
+#### Mystery5
+
+`mystery5` was a document variable that contained the number 4.
+
+#### Mystery6
+
+`mystery6` added a 1 in font 1 to the end of the text in the Word document, so that digit was 1.
+
+#### Mystery7
+
+`mystery7` printed the number 1 in the Immediate window.
+
+### Mystery8
+
+`mystery8` was the digit in the password to the macros, "Mystery8Is5," so that digit was 5.
+
+The final flag that we got was from combining all the digits to create flag{27424115}
+
  ---
  
 # Wireshark
 
 Provided was a readme file, a pdf file documenting the communication and encryption process, and a pcap file containing the encrypted packets.
 
-The first step was to examine the documentation and determine how the client and the AP communicate and authenticate.
+After reviewing the readme, the process to complete the challenge was very straightfoward; examine the documentation, determine how the client and the AP communicate and authenticate, collect relevant information from the packet capture, and decrypt the data.
 
 <details>
   <summary>Simplified Documentation</summary>
@@ -431,8 +439,6 @@ The first step was to examine the documentation and determine how the client and
      <pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultrices elit non enim faucibus, quis molestie dolor molestie. Pellentesque congue mollis pharetra. Ut ultrices purus est, sed vulputate purus euismod vitae. Curabitur nec ipsum sed neque maximus euismod in eget ex. Fusce arcu libero, vestibulum sit amet metus laoreet, dictum tempus velit. Integer tempor dolor sodales sapien vulputate, vel placerat massa laoreet. Quisque imperdiet consequat quam, in luctus justo efficitur ac. Phasellus maximus venenatis massa sit amet efficitur. Mauris congue, dui vel gravida venenatis, dui libero luctus erat, quis semper erat est non nunc.[Nothing to see here]Sed accumsan mi sed erat convallis volutpat nec ut orci. Duis blandit maximus dolor id vestibulum. Sed vel sapien ut odio volutpat venenatis. Aliquam dolor eros, maximus sit amet tellus viverra, pharetra laoreet lacus. Morbi pulvinar est lectus, vitae fermentum dui maximus id. Quisque orci nisi, viverra faucibus ultricies id, tristique in arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut aliquet neque, ac porttitor lorem.[KEY: 7 5 4 7 7 0 3 0]Maecenas vehicula luctus libero quis venenatis. Nullam vestibulum ex a neque dignissim facilisis. Aenean feugiat velit quis facilisis tristique. Sed id convallis odio. Nulla a mi tempus arcu pharetra pellentesque. Fusce tellus orci, consectetur quis enim sed, laoreet.</pre>
    </details>
 
----
-
 Once decrypted, the plaintext message contains the key: [KEY: 7 5 4 7 7 0 3 0]
 
 <details>
@@ -443,4 +449,3 @@ Sed accumsan mi sed erat convallis volutpat nec ut orci. Duis blandit maximus do
 [KEY: 7 5 4 7 7 0 3 0]
 Maecenas vehicula luctus libero quis venenatis. Nullam vestibulum ex a neque dignissim facilisis. Aenean feugiat velit quis facilisis tristique. Sed id convallis odio. Nulla a mi tempus arcu pharetra pellentesque. Fusce tellus orci, consectetur quis enim sed, laoreet.</pre>
 </details>
-
